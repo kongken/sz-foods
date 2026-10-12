@@ -33,6 +33,16 @@ npm run build
 npx wrangler pages deploy dist --project-name sz-foods
 ```
 
+## 分享卡片(微信等)
+
+`index.html` 已带 title、description 和 Open Graph 标签,分享图为 `public/og.png`(1200×630)。
+分享图和链接必须是绝对地址,构建时由 `vite.config.js` 注入站点域名:
+
+- 在 Cloudflare Pages 的环境变量里设置 `SITE_URL=https://你的域名`(推荐,绑定自定义域名后填它)。
+- 没设置时回退到 Cloudflare 自带的 `CF_PAGES_URL`(形如 `https://xxx.pages.dev`)。
+
+注意:微信聊天里直接发链接,是否显示图文卡片取决于微信自身策略;要完全自定义「发给朋友/朋友圈」卡片,需接入微信 JS-SDK(需要已备案的公众号域名和后端签名),静态站点无法单独实现。
+
 ## 数据说明
 
 - 每个区一个工作表;「避雷！！！」表单独作为避雷清单;「智能表1」与「龙岗区」重复,已忽略。
