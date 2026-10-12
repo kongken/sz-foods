@@ -8,7 +8,7 @@ const state = {
   tab: 'good',
   q: '',
   sort: 'default',
-  price: '',
+  prices: new Set(),
   district: '',
   category: '',
   shown: PAGE,
@@ -18,7 +18,7 @@ const el = {
   summary: $('summary'),
   q: $('q'),
   sort: $('sort'),
-  price: $('price'),
+  prices: $('prices'),
   districts: $('districts'),
   categories: $('categories'),
   count: $('count'),
@@ -52,14 +52,14 @@ function items() {
 
 function filtered() {
   const q = state.q.trim().toLowerCase();
-  const [lo, hi] = state.price ? state.price.split('-').map(Number) : [null, null];
+  const ranges = [...state.prices].map((v) => v.split('-').map(Number));
   let out = items().filter((r) => {
     if (state.district && r.district !== state.district) return false;
     if (state.category && !(r.categories || []).includes(state.category)) return false;
-    if (state.price) {
+    if (ranges.length) {
       if (r.priceMin == null) return false;
       const avg = (r.priceMin + r.priceMax) / 2;
-      if (avg < lo || avg >= hi) return false;
+      if (!ranges.some(([lo, hi]) => avg >= lo && avg < hi)) return false;
     }
     if (q) {
       const hay = [r.name, r.address, r.dishes, r.note, r.reason, r.ratingText, ...(r.extras || [])]
@@ -144,7 +144,30 @@ function chips(container, name, values, key, allLabel) {
   container.append(make('', allLabel), ...values.map((v) => make(v.value, v.label, v.count)));
 }
 
+const PRICE_RANGES = [
+  { value: '0-30', label: '30 元以下' },
+  { value: '30-60', label: '30–60 元' },
+  { value: '60-100', label: '60–100 元' },
+  { value: '100-200', label: '100–200 元' },
+  { value: '200-99999', label: '200 元以上' },
+];
+
+function priceChips() {
+  for (const { value, label } of PRICE_RANGES) {
+    const id = `price-${value}`;
+    const input = h('input', { type: 'checkbox', id, value });
+    input.addEventListener('change', () => {
+      if (input.checked) state.prices.add(value);
+      else state.prices.delete(value);
+      state.shown = PAGE;
+      render();
+    });
+    el.prices.append(h('label', { class: 'chip', for: id }, input, h('span', { text: label })));
+  }
+}
+
 function setup() {
+  priceChips();
   const goodByDistrict = (d) => data.restaurants.filter((r) => r.district === d).length;
   const districts = data.districts.filter((d) => goodByDistrict(d.name) + data.avoid.filter((a) => a.district === d.name).length > 0);
   chips(el.districts, 'district', districts.map((d) => ({ value: d.name, label: d.name, count: goodByDistrict(d.name) })), 'district', '全部');
@@ -161,11 +184,11 @@ function setup() {
     timer = setTimeout(() => { state.q = el.q.value; state.shown = PAGE; render(); }, 120);
   });
   el.sort.addEventListener('change', () => { state.sort = el.sort.value; state.shown = PAGE; render(); });
-  el.price.addEventListener('change', () => { state.price = el.price.value; state.shown = PAGE; render(); });
   el.more.addEventListener('click', () => { state.shown += PAGE; render(); });
   el.reset.addEventListener('click', () => {
-    Object.assign(state, { q: '', sort: 'default', price: '', district: '', category: '', shown: PAGE });
-    el.q.value = ''; el.sort.value = 'default'; el.price.value = '';
+    Object.assign(state, { q: '', sort: 'default', prices: new Set(), district: '', category: '', shown: PAGE });
+    el.q.value = ''; el.sort.value = 'default';
+    document.querySelectorAll('#prices input').forEach((i) => { i.checked = false; });
     document.querySelectorAll('.chip input[value=""]').forEach((i) => { i.checked = true; });
     render();
   });
