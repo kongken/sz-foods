@@ -79,7 +79,7 @@ for (const sheetName of wb.SheetNames) {
     const base = {
       id: `${sheetName}-${idx + 1}`,
       name: first || '（未填店名）',
-      district: sheetName,
+      district: isAvoid ? '' : sheetName, // 避雷表不分区
       address: str(address),
       dishes: str(dishes),
       ...parsePrice(price),

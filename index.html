@@ -4,29 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="深圳美食地图:按区、品类、人均、评分筛选的深圳吃喝推荐与避雷清单。" />
-    <meta name="theme-color" content="#e8590c" />
+    <meta name="theme-color" content="#2a2470" />
     <title>深圳美食地图</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
   <body>
     <a class="skip" href="#list">跳到列表</a>
-    <header class="top">
-      <div class="wrap">
+    <header class="hero">
+      <div class="wrap hero-inner">
+        <p class="eyebrow">深圳 · SHENZHEN</p>
         <h1>深圳美食地图</h1>
-        <p class="sub" id="summary">加载中…</p>
-        <div class="tabs" role="tablist" aria-label="清单类型">
-          <button role="tab" id="tab-good" aria-selected="true" aria-controls="list" data-tab="good">推荐</button>
-          <button role="tab" id="tab-avoid" aria-selected="false" aria-controls="list" data-tab="avoid">避雷</button>
-        </div>
+        <p class="lead">来了就是深圳人,先吃一顿再说。</p>
+        <dl class="stats" id="summary"></dl>
       </div>
+      <svg class="skyline" viewBox="0 0 1440 180" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+        <g class="sky-back"><rect x="0" y="111" width="26" height="69"/><rect x="34" y="124" width="40" height="56"/><rect x="74" y="118" width="34" height="62"/><rect x="112" y="123" width="34" height="57"/><rect x="146" y="119" width="18" height="61"/><rect x="172" y="122" width="30" height="58"/><rect x="202" y="60" width="18" height="120"/><rect x="228" y="115" width="18" height="65"/><rect x="246" y="123" width="40" height="57"/><rect x="294" y="102" width="18" height="78"/><rect x="312" y="113" width="34" height="67"/><rect x="350" y="112" width="30" height="68"/><rect x="380" y="91" width="34" height="89"/><rect x="414" y="106" width="18" height="74"/><rect x="436" y="60" width="18" height="120"/><rect x="454" y="123" width="34" height="57"/><rect x="488" y="62" width="30" height="118"/><rect x="526" y="71" width="26" height="109"/><rect x="560" y="92" width="26" height="88"/><rect x="586" y="99" width="22" height="81"/><rect x="608" y="92" width="34" height="88"/><rect x="650" y="73" width="26" height="107"/><rect x="680" y="121" width="34" height="59"/><rect x="714" y="77" width="34" height="103"/><rect x="748" y="111" width="26" height="69"/><rect x="782" y="125" width="30" height="55"/><rect x="812" y="90" width="34" height="90"/><rect x="850" y="86" width="40" height="94"/><rect x="898" y="72" width="34" height="108"/><rect x="932" y="96" width="18" height="84"/><rect x="958" y="122" width="40" height="58"/><rect x="998" y="91" width="40" height="89"/><rect x="1046" y="81" width="26" height="99"/><rect x="1076" y="71" width="18" height="109"/><rect x="1098" y="116" width="22" height="64"/><rect x="1128" y="103" width="18" height="77"/><rect x="1150" y="99" width="22" height="81"/><rect x="1180" y="67" width="30" height="113"/><rect x="1210" y="73" width="22" height="107"/><rect x="1240" y="95" width="34" height="85"/><rect x="1274" y="60" width="30" height="120"/><rect x="1308" y="77" width="40" height="103"/><rect x="1352" y="82" width="40" height="98"/><rect x="1392" y="120" width="22" height="60"/><rect x="1414" y="101" width="22" height="79"/><rect x="1436" y="68" width="18" height="112"/></g>
+        <g class="sky-front"><rect x="-10" y="120" width="26" height="60"/><rect x="16" y="103" width="22" height="77"/><rect x="42" y="116" width="34" height="64"/><rect x="76" y="91" width="40" height="89"/><rect x="116" y="106" width="30" height="74"/><rect x="154" y="106" width="30" height="74"/><rect x="184" y="105" width="30" height="75"/><rect x="214" y="148" width="22" height="32"/><rect x="236" y="136" width="30" height="44"/><rect x="266" y="150" width="26" height="30"/><rect x="292" y="137" width="18" height="43"/><rect x="310" y="153" width="26" height="27"/><rect x="336" y="108" width="22" height="72"/><rect x="358" y="124" width="40" height="56"/><rect x="402" y="110" width="34" height="70"/><rect x="444" y="142" width="18" height="38"/><rect x="470" y="95" width="30" height="85"/><rect x="508" y="146" width="26" height="34"/><rect x="900" y="113" width="18" height="67"/><rect x="922" y="136" width="30" height="44"/><rect x="952" y="89" width="22" height="91"/><rect x="978" y="87" width="22" height="93"/><rect x="1000" y="118" width="34" height="62"/><rect x="1034" y="123" width="40" height="57"/><rect x="1078" y="111" width="22" height="69"/><rect x="1100" y="87" width="34" height="93"/><rect x="1138" y="128" width="40" height="52"/><rect x="1178" y="105" width="22" height="75"/><rect x="1200" y="90" width="22" height="90"/><rect x="1230" y="153" width="26" height="27"/><rect x="1256" y="96" width="26" height="84"/><rect x="1286" y="112" width="22" height="68"/><rect x="1316" y="112" width="40" height="68"/><rect x="1360" y="128" width="18" height="52"/><rect x="1378" y="96" width="22" height="84"/><rect x="1400" y="130" width="26" height="50"/><rect x="1434" y="156" width="34" height="24"/>
+<path d="M562 180c0-44 14-86 30-132 16 46 30 88 30 132Z"/>
+<rect x="660" y="64" width="38" height="116"/><rect x="668" y="46" width="22" height="18"/><rect x="678" y="14" width="2" height="32"/>
+<polygon points="738,180 748,56 760,10 772,56 782,180"/><rect x="759" y="0" width="2" height="12"/>
+<polygon points="816,180 816,34 852,26 852,180"/></g>
+      </svg>
     </header>
 
     <main class="wrap">
-      <section class="filters" aria-label="筛选">
+      <div class="tabs" role="tablist" aria-label="清单类型">
+        <button type="button" role="tab" id="tab-good" aria-selected="true" aria-controls="list" data-tab="good">推荐 <span class="n" id="n-good"></span></button>
+        <button type="button" role="tab" id="tab-avoid" aria-selected="false" aria-controls="list" data-tab="avoid">避雷 <span class="n" id="n-avoid"></span></button>
+      </div>
+
+      <section class="panel" aria-label="筛选">
         <div class="row">
           <label class="field grow">
             <span>搜索</span>
-            <input id="q" type="search" placeholder="店名、地址、推荐菜、备注" autocomplete="off" />
+            <span class="search">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21 21-4.3-4.3"/><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z"/></svg>
+              <input id="q" type="search" placeholder="店名、地址、推荐菜、备注" autocomplete="off" />
+            </span>
           </label>
           <label class="field">
             <span>排序</span>
@@ -43,8 +57,12 @@
         <fieldset class="chips" id="categories"><legend>品类</legend></fieldset>
         <div class="row actions">
           <p id="count" class="count" role="status" aria-live="polite"></p>
-          <button type="button" id="random" class="btn">今天吃什么?随机一家</button>
-          <button type="button" id="reset" class="btn ghost">重置筛选</button>
+          <button type="button" id="reset" class="btn ghost">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>重置筛选
+          </button>
+          <button type="button" id="random" class="btn primary">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="m4 4 5 5"/></svg>随机一家
+          </button>
         </div>
       </section>
 
