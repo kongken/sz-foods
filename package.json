@@ -1,0 +1,20 @@
+{
+  "name": "sz-foods",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "深圳美食地图 - 基于 sz-foods.xlsx 的静态站点,可部署到 Cloudflare Pages",
+  "scripts": {
+    "build:data": "node scripts/convert.mjs",
+    "dev": "npm run build:data && vite",
+    "build": "npm run build:data && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0",
+    "xlsx": "^0.18.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

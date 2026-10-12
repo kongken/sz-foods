@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="深圳美食地图:按区、品类、人均、评分筛选的深圳吃喝推荐与避雷清单。" />
+    <meta name="theme-color" content="#e8590c" />
+    <title>深圳美食地图</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip" href="#list">跳到列表</a>
+    <header class="top">
+      <div class="wrap">
+        <h1>深圳美食地图</h1>
+        <p class="sub" id="summary">加载中…</p>
+        <div class="tabs" role="tablist" aria-label="清单类型">
+          <button role="tab" id="tab-good" aria-selected="true" aria-controls="list" data-tab="good">推荐</button>
+          <button role="tab" id="tab-avoid" aria-selected="false" aria-controls="list" data-tab="avoid">避雷</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="filters" aria-label="筛选">
+        <div class="row">
+          <label class="field grow">
+            <span>搜索</span>
+            <input id="q" type="search" placeholder="店名、地址、推荐菜、备注" autocomplete="off" />
+          </label>
+          <label class="field">
+            <span>排序</span>
+            <select id="sort">
+              <option value="default">默认顺序</option>
+              <option value="score">评分从高到低</option>
+              <option value="priceAsc">人均从低到高</option>
+              <option value="priceDesc">人均从高到低</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>人均</span>
+            <select id="price">
+              <option value="">不限</option>
+              <option value="0-30">30 元以下</option>
+              <option value="30-60">30–60 元</option>
+              <option value="60-100">60–100 元</option>
+              <option value="100-200">100–200 元</option>
+              <option value="200-99999">200 元以上</option>
+            </select>
+          </label>
+        </div>
+        <fieldset class="chips" id="districts"><legend>区域</legend></fieldset>
+        <fieldset class="chips" id="categories"><legend>品类</legend></fieldset>
+        <div class="row actions">
+          <p id="count" class="count" role="status" aria-live="polite"></p>
+          <button type="button" id="random" class="btn">今天吃什么?随机一家</button>
+          <button type="button" id="reset" class="btn ghost">重置筛选</button>
+        </div>
+      </section>
+
+      <section id="list" class="list" tabindex="-1" aria-label="结果列表"></section>
+      <div class="more"><button type="button" id="more" class="btn" hidden>显示更多</button></div>
+    </main>
+
+    <footer class="wrap foot">
+      <p>数据来自 sz-foods.xlsx,评分为各人主观打分,已统一折算为 100 分制;仅供参考。</p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
